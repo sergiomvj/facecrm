@@ -1,0 +1,5 @@
+{
+  "name": "FaceCRM - Multi-App CRM",
+  "description": "A simple, functional CRM that manages customer data and revenue across multiple apps of a company, with per-app views/controls and consolidated cross-app dashboards.",
+  "requestFramePermissions": []
+}
