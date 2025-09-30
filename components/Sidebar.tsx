@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { DashboardIcon, AppsIcon, ContactsIcon, DealsIcon, TasksIcon, LogoIcon } from './icons';
+import { DashboardIcon, AppsIcon, ContactsIcon, DealsIcon, TasksIcon } from './icons';
 import { useAppContext } from '../context/AppContext';
 
 interface NavItemProps {
@@ -17,7 +17,7 @@ const NavItem: React.FC<NavItemProps> = ({ icon, label, path, isActive }) => (
             className={`flex items-center p-3 rounded-lg cursor-pointer transition-colors ${
                 isActive
                     ? 'bg-brand-primary text-white'
-                    : 'text-neutral-200 hover:bg-neutral-700'
+                    : 'text-neutral-200 hover:bg-neutral-700 dark:hover:bg-neutral-800'
             }`}
         >
             {icon}
@@ -46,17 +46,17 @@ const DataSourceToggle: React.FC = () => {
     return (
         <div className="flex flex-col items-center space-y-2">
             <div className="flex items-center justify-center space-x-2">
-                <span className={`text-xs font-medium ${!isLive ? 'text-white' : 'text-neutral-400'}`}>Mock Data</span>
+                <span className={`text-xs font-medium ${!isLive ? 'text-white' : 'text-neutral-400 dark:text-neutral-500'}`}>Mock Data</span>
                 <button
                     onClick={handleToggle}
                     disabled={loading}
-                    className={`relative inline-flex items-center h-6 rounded-full w-11 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-800 focus:ring-brand-primary ${isLive ? 'bg-brand-primary' : 'bg-neutral-600'} ${loading ? 'cursor-wait' : ''}`}
+                    className={`relative inline-flex items-center h-6 rounded-full w-11 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-800 focus:ring-brand-primary dark:focus:ring-offset-neutral-900 ${isLive ? 'bg-brand-primary' : 'bg-neutral-600'} ${loading ? 'cursor-wait' : ''}`}
                 >
                     <span className={`inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-300 ${isLive ? 'translate-x-6' : 'translate-x-1'}`} />
                 </button>
-                <span className={`text-xs font-medium ${isLive ? 'text-white' : 'text-neutral-400'}`}>Live Data</span>
+                <span className={`text-xs font-medium ${isLive ? 'text-white' : 'text-neutral-400 dark:text-neutral-500'}`}>Live Data</span>
             </div>
-            {loading && <p className="text-xs text-neutral-400">Loading data...</p>}
+            {loading && <p className="text-xs text-neutral-400 dark:text-neutral-500">Loading data...</p>}
         </div>
     );
 };
@@ -64,12 +64,16 @@ const DataSourceToggle: React.FC = () => {
 
 const Sidebar: React.FC = () => {
   const location = useLocation();
+  const { theme } = useAppContext();
+
+  const logoUrl = theme === 'dark' 
+    ? 'https://i.imgur.com/RWK8r26.png' 
+    : 'https://i.imgur.com/QTntjm8.png';
 
   return (
-    <aside className="w-64 bg-neutral-800 text-white flex flex-col h-screen p-4">
-      <div className="flex items-center justify-center gap-2 py-4 mb-8 border-b border-neutral-700">
-        <LogoIcon className="w-10 h-10" />
-        <span className="text-2xl font-bold">FaceCRM</span>
+    <aside className="w-64 bg-neutral-800 text-white flex flex-col h-screen p-4 dark:bg-neutral-900">
+      <div className="flex items-center justify-center py-4 mb-8 border-b border-neutral-700 dark:border-neutral-800">
+        <img src={logoUrl} alt="FaceCRM Logo" />
       </div>
       <nav>
         <ul className="space-y-2">
@@ -84,7 +88,7 @@ const Sidebar: React.FC = () => {
           ))}
         </ul>
       </nav>
-      <div className="mt-auto pt-4 border-t border-neutral-700">
+      <div className="mt-auto pt-4 border-t border-neutral-700 dark:border-neutral-800">
           <DataSourceToggle />
       </div>
     </aside>

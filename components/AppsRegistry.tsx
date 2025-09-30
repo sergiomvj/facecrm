@@ -31,43 +31,43 @@ const AddAppModal: React.FC<AddAppModalProps> = ({ isOpen, onClose }) => {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center">
-            <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md relative">
-                <div className="flex justify-between items-center pb-4 border-b">
-                    <h2 className="text-xl font-semibold text-neutral-800">Register New App</h2>
-                    <button onClick={onClose} className="p-1 rounded-full hover:bg-neutral-200">
-                        <XIcon className="w-6 h-6 text-neutral-600" />
+            <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md relative dark:bg-neutral-800">
+                <div className="flex justify-between items-center pb-4 border-b dark:border-neutral-700">
+                    <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Register New App</h2>
+                    <button onClick={onClose} className="p-1 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700">
+                        <XIcon className="w-6 h-6 text-neutral-600 dark:text-neutral-300" />
                     </button>
                 </div>
                 <form onSubmit={handleSubmit} className="mt-6 space-y-4">
                     <div>
-                        <label htmlFor="appName" className="block text-sm font-medium text-neutral-700">App Name</label>
+                        <label htmlFor="appName" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300">App Name</label>
                         <input
                             type="text"
                             id="appName"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-primary focus:border-brand-primary sm:text-sm"
+                            className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-primary focus:border-brand-primary sm:text-sm dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
                             required
                         />
                     </div>
                     <div>
-                        <label htmlFor="plan" className="block text-sm font-medium text-neutral-700">Plan</label>
+                        <label htmlFor="plan" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Plan</label>
                         <select
                             id="plan"
                             value={plan}
                             onChange={(e) => setPlan(e.target.value as 'Enterprise' | 'Pro' | 'Free')}
-                            className="mt-1 block w-full px-3 py-2 border border-neutral-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-brand-primary focus:border-brand-primary sm:text-sm"
+                            className="mt-1 block w-full px-3 py-2 border border-neutral-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-brand-primary focus:border-brand-primary sm:text-sm dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
                         >
                             <option value="Pro">Pro</option>
                             <option value="Enterprise">Enterprise</option>
                             <option value="Free">Free</option>
                         </select>
                     </div>
-                    <div className="flex justify-end pt-6 border-t mt-6 space-x-3">
-                        <button type="button" onClick={onClose} className="px-4 py-2 bg-neutral-100 text-neutral-700 rounded-md hover:bg-neutral-200">
+                    <div className="flex justify-end pt-6 border-t mt-6 space-x-3 dark:border-neutral-700">
+                        <button type="button" onClick={onClose} className="px-4 py-2 bg-neutral-100 text-neutral-700 rounded-md hover:bg-neutral-200 dark:bg-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-600">
                             Cancel
                         </button>
-                        <button type="submit" disabled={!isFormValid} className="px-4 py-2 bg-brand-primary text-white rounded-md hover:bg-blue-800 disabled:bg-blue-300">
+                        <button type="submit" disabled={!isFormValid} className="px-4 py-2 bg-brand-primary text-white rounded-md hover:bg-blue-800 disabled:bg-blue-300 dark:disabled:bg-blue-800/50">
                             Register App
                         </button>
                     </div>
@@ -93,17 +93,17 @@ const AppsRegistry: React.FC = () => {
                     Register New App
                 </button>
             </div>
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden dark:bg-neutral-800">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                    <thead className="bg-gray-50 dark:bg-neutral-700">
                         <tr>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-400">
                                 App Name
                             </th>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-400">
                                 Plan
                             </th>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-400">
                                 Created At
                             </th>
                             <th scope="col" className="relative px-6 py-3">
@@ -111,12 +111,12 @@ const AppsRegistry: React.FC = () => {
                             </th>
                         </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
+                    <tbody className="bg-white divide-y divide-gray-200 dark:bg-neutral-800 dark:divide-neutral-700">
                         {apps.map((app: App) => (
                             <tr key={app.id}>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <div className="text-sm font-medium text-gray-900">{app.name}</div>
-                                    <div className="text-sm text-gray-500">{app.id}</div>
+                                    <div className="text-sm font-medium text-gray-900 dark:text-neutral-200">{app.name}</div>
+                                    <div className="text-sm text-gray-500 dark:text-neutral-400">{app.id}</div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
@@ -126,7 +126,7 @@ const AppsRegistry: React.FC = () => {
                                         {app.plan}
                                     </span>
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-neutral-400">
                                     {new Date(app.createdAt).toLocaleDateString()}
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">

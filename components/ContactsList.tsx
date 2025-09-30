@@ -51,49 +51,49 @@ const AddContactModal: React.FC<AddContactModalProps> = ({ isOpen, onClose }) =>
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center" aria-modal="true" role="dialog">
-      <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-lg relative">
-        <div className="flex justify-between items-center pb-4 border-b">
-          <h2 className="text-xl font-semibold text-neutral-800">Add New Contact</h2>
-          <button onClick={onClose} className="p-1 rounded-full hover:bg-neutral-200" aria-label="Close modal">
-            <XIcon className="w-6 h-6 text-neutral-600" />
+      <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-lg relative dark:bg-neutral-800">
+        <div className="flex justify-between items-center pb-4 border-b dark:border-neutral-700">
+          <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">Add New Contact</h2>
+          <button onClick={onClose} className="p-1 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700" aria-label="Close modal">
+            <XIcon className="w-6 h-6 text-neutral-600 dark:text-neutral-300" />
           </button>
         </div>
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-neutral-700">Full Name</label>
+            <label htmlFor="name" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Full Name</label>
             <input
               type="text"
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-primary focus:border-brand-primary sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-primary focus:border-brand-primary sm:text-sm dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
               required
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-neutral-700">Email</label>
+            <label htmlFor="email" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Email</label>
             <input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-primary focus:border-brand-primary sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-primary focus:border-brand-primary sm:text-sm dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
               required
             />
           </div>
           <div>
-            <label htmlFor="company" className="block text-sm font-medium text-neutral-700">Company</label>
+            <label htmlFor="company" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Company</label>
             <input
               type="text"
               id="company"
               value={company}
               onChange={(e) => setCompany(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-primary focus:border-brand-primary sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-primary focus:border-brand-primary sm:text-sm dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
               required
             />
           </div>
           <div>
-            <p className="block text-sm font-medium text-neutral-700">Associate with Apps</p>
+            <p className="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Associate with Apps</p>
             <div className="mt-2 grid grid-cols-2 gap-4">
               {apps.map((app: App) => (
                 <div key={app.id} className="flex items-center">
@@ -104,23 +104,23 @@ const AddContactModal: React.FC<AddContactModalProps> = ({ isOpen, onClose }) =>
                     onChange={() => handleAppToggle(app.id)}
                     className="h-4 w-4 text-brand-primary border-neutral-300 rounded focus:ring-brand-primary"
                   />
-                  <label htmlFor={`app-${app.id}`} className="ml-3 text-sm text-neutral-600">{app.name}</label>
+                  <label htmlFor={`app-${app.id}`} className="ml-3 text-sm text-neutral-600 dark:text-neutral-300">{app.name}</label>
                 </div>
               ))}
             </div>
           </div>
-          <div className="flex justify-end pt-6 border-t mt-6 space-x-3">
+          <div className="flex justify-end pt-6 border-t mt-6 space-x-3 dark:border-neutral-700">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-neutral-100 text-neutral-700 rounded-md hover:bg-neutral-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500"
+              className="px-4 py-2 bg-neutral-100 text-neutral-700 rounded-md hover:bg-neutral-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 dark:bg-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-600"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={!isFormValid || isSubmitting}
-              className="px-4 py-2 bg-brand-primary text-white rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary disabled:bg-blue-300 disabled:cursor-not-allowed"
+              className="px-4 py-2 bg-brand-primary text-white rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary disabled:bg-blue-300 disabled:cursor-not-allowed dark:disabled:bg-blue-800/50"
             >
               {isSubmitting ? 'Adding...' : 'Add Contact'}
             </button>
@@ -154,17 +154,17 @@ const ContactsList: React.FC = () => {
                     New Contact
                 </button>
             </div>
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden dark:bg-neutral-800">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                    <thead className="bg-gray-50 dark:bg-neutral-700">
                         <tr>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-400">
                                 Name
                             </th>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-400">
                                 Company
                             </th>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-neutral-400">
                                 Joined
                             </th>
                             <th scope="col" className="relative px-6 py-3">
@@ -172,7 +172,7 @@ const ContactsList: React.FC = () => {
                             </th>
                         </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
+                    <tbody className="bg-white divide-y divide-gray-200 dark:bg-neutral-800 dark:divide-neutral-700">
                         {filteredContacts.map((contact: Contact) => (
                             <tr key={contact.id}>
                                 <td className="px-6 py-4 whitespace-nowrap">
@@ -181,15 +181,15 @@ const ContactsList: React.FC = () => {
                                             <img className="h-10 w-10 rounded-full" src={contact.avatarUrl} alt="" />
                                         </div>
                                         <div className="ml-4">
-                                            <div className="text-sm font-medium text-gray-900">{contact.name}</div>
-                                            <div className="text-sm text-gray-500">{contact.email}</div>
+                                            <div className="text-sm font-medium text-gray-900 dark:text-neutral-200">{contact.name}</div>
+                                            <div className="text-sm text-gray-500 dark:text-neutral-400">{contact.email}</div>
                                         </div>
                                     </div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <div className="text-sm text-gray-900">{contact.company}</div>
+                                    <div className="text-sm text-gray-900 dark:text-neutral-200">{contact.company}</div>
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-neutral-400">
                                     {/* Fix: Corrected typo from toLocaleDateDateString to toLocaleDateString */}
                                     {new Date(contact.createdAt).toLocaleDateString()}
                                 </td>

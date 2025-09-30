@@ -4,16 +4,18 @@ import { createClient } from '@supabase/supabase-js';
   =============================================================================
   === DATABASE SETUP SCRIPT ===================================================
   =============================================================================
-  Please copy the SQL script provided in the conversational response and run it 
-  in your Supabase SQL Editor. This environment has restrictions that prevent 
-  creating .sql files or embedding large scripts, so it is provided in the chat.
+  Please copy the SQL script provided below and run it in your Supabase SQL 
+  Editor to update your database schema. This environment has restrictions that 
+  prevent creating .sql files or embedding large scripts.
 
   --- Run the following in your Supabase SQL Editor for this update ---
+
   ALTER TABLE deals
   ADD COLUMN probability INTEGER CHECK (probability >= 0 AND probability <= 100);
 
   ALTER TABLE deals
   ADD COLUMN "nextStep" TEXT;
+  
   =============================================================================
 */
 

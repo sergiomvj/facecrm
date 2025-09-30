@@ -4,6 +4,7 @@ import { mockApps, mockContacts, mockDeals, mockTasks } from '../data/mockData';
 import { supabase } from '../lib/supabaseClient';
 
 type DataSource = 'mock' | 'live';
+type Theme = 'light' | 'dark';
 
 interface AppContextType {
   apps: App[];
@@ -24,6 +25,8 @@ interface AppContextType {
   dataSource: DataSource;
   setDataSource: (source: DataSource) => void;
   loading: boolean;
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -36,7 +39,30 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [selectedAppId, setSelectedAppId] = useState<string>('all');
   const [loading, setLoading] = useState<boolean>(true);
   const [dataSource, setDataSource] = useState<DataSource>(() => (localStorage.getItem('dataSource') as DataSource) || 'mock');
+  const [theme, setThemeState] = useState<Theme>(() => {
+    if (typeof window !== 'undefined' && localStorage.getItem('theme')) {
+        return localStorage.getItem('theme') as Theme;
+    }
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+    }
+    return 'light';
+  });
   
+  const setTheme = (newTheme: Theme) => {
+    const root = window.document.documentElement;
+    const isDark = newTheme === 'dark';
+
+    root.classList.remove(isDark ? 'light' : 'dark');
+    root.classList.add(newTheme);
+    localStorage.setItem('theme', newTheme);
+    setThemeState(newTheme);
+  };
+  
+  useEffect(() => {
+    setTheme(theme);
+  }, []);
+
   useEffect(() => {
     localStorage.setItem('dataSource', dataSource);
     fetchData();
@@ -173,7 +199,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const value = {
     apps, contacts, deals, tasks, selectedAppId, setSelectedAppId, selectedAppName, 
     addApp, addContact, addDeal, editDeal, deleteDeal, addTask, editTask, deleteTask,
-    dataSource, setDataSource, loading
+    dataSource, setDataSource, loading,
+    theme, setTheme
   };
 
   return (

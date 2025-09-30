@@ -1,12 +1,34 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
-import { ChevronDownIcon, SearchIcon } from './icons';
+import { ChevronDownIcon, SearchIcon, SunIcon, MoonIcon } from './icons';
 import { Contact, Deal } from '../types';
 
 interface HeaderProps {
     title: string;
 }
+
+const ThemeToggle: React.FC = () => {
+    const { theme, setTheme } = useAppContext();
+
+    const toggleTheme = () => {
+        setTheme(theme === 'light' ? 'dark' : 'light');
+    };
+
+    return (
+        <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full text-gray-500 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-neutral-700 focus:outline-none"
+            aria-label="Toggle dark mode"
+        >
+            {theme === 'light' ? (
+                <MoonIcon className="w-6 h-6" />
+            ) : (
+                <SunIcon className="w-6 h-6" />
+            )}
+        </button>
+    );
+};
 
 const AppSwitcher: React.FC = () => {
     const { apps, selectedAppId, setSelectedAppId, selectedAppName } = useAppContext();
@@ -32,18 +54,18 @@ const AppSwitcher: React.FC = () => {
         <div className="relative" ref={dropdownRef}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
+                className="flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-200 dark:hover:bg-neutral-600"
             >
                 <span>{selectedAppName}</span>
                 <ChevronDownIcon className="w-5 h-5 ml-2 -mr-1" />
             </button>
             {isOpen && (
-                <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10">
+                <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10 dark:bg-neutral-800 dark:ring-neutral-700">
                     <div className="py-1" role="menu" aria-orientation="vertical">
                         <a
                             href="#"
                             onClick={(e) => { e.preventDefault(); handleSelect('all'); }}
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-neutral-200 dark:hover:bg-neutral-700"
                         >
                             All Apps
                         </a>
@@ -52,7 +74,7 @@ const AppSwitcher: React.FC = () => {
                                 key={app.id}
                                 href="#"
                                 onClick={(e) => { e.preventDefault(); handleSelect(app.id); }}
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-neutral-200 dark:hover:bg-neutral-700"
                             >
                                 {app.name}
                             </a>
@@ -108,31 +130,31 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
 
 
     return (
-        <header className="bg-neutral-50 border-b border-neutral-200 p-4 flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-neutral-800">{title}</h1>
+        <header className="bg-neutral-50 border-b border-neutral-200 p-4 flex items-center justify-between dark:bg-neutral-800 dark:border-neutral-700">
+            <h1 className="text-2xl font-bold text-neutral-800 dark:text-neutral-100">{title}</h1>
             <div className="flex items-center space-x-4">
                 <div className="relative" ref={searchRef}>
                     <SearchIcon className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 z-10" />
                     <input
                         type="text"
                         placeholder="Search contacts and deals..."
-                        className="pl-10 pr-4 py-2 border border-gray-300 rounded-md text-sm focus:ring-brand-primary focus:border-brand-primary w-64"
+                        className="pl-10 pr-4 py-2 border border-gray-300 rounded-md text-sm focus:ring-brand-primary focus:border-brand-primary w-64 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white dark:placeholder-neutral-400"
                         value={searchQuery}
                         onChange={handleSearchChange}
                         onFocus={() => searchQuery.length > 1 && setIsSearchActive(true)}
                     />
                      {isSearchActive && (searchResults.contacts.length > 0 || searchResults.deals.length > 0) && (
-                         <div className="absolute mt-2 w-96 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-20 max-h-96 overflow-y-auto">
+                         <div className="absolute mt-2 w-96 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-20 max-h-96 overflow-y-auto dark:bg-neutral-900 dark:ring-neutral-700">
                             <div className="py-1">
                                 {searchResults.contacts.length > 0 && (
                                     <div>
-                                        <h3 className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Contacts</h3>
+                                        <h3 className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider dark:text-neutral-400">Contacts</h3>
                                         <ul>
                                             {searchResults.contacts.map(contact => (
                                                 <li key={contact.id}>
-                                                    <Link to={`/contacts/${contact.id}`} className="block px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                                                        <p className="text-sm font-medium text-gray-900">{contact.name}</p>
-                                                        <p className="text-sm text-gray-500">{contact.company} &middot; {contact.email}</p>
+                                                    <Link to={`/contacts/${contact.id}`} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer">
+                                                        <p className="text-sm font-medium text-gray-900 dark:text-neutral-200">{contact.name}</p>
+                                                        <p className="text-sm text-gray-500 dark:text-neutral-400">{contact.company} &middot; {contact.email}</p>
                                                     </Link>
                                                 </li>
                                             ))}
@@ -141,14 +163,14 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
                                 )}
                                  {searchResults.deals.length > 0 && (
                                     <div>
-                                        <h3 className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider border-t border-gray-100">Deals</h3>
+                                        <h3 className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider border-t border-gray-100 dark:text-neutral-400 dark:border-neutral-800">Deals</h3>
                                         <ul>
                                             {searchResults.deals.map(deal => {
                                                 const contact = contacts.find(c => c.id === deal.contactId);
                                                 return (
-                                                    <li key={deal.id} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                                                        <p className="text-sm font-medium text-gray-900">{deal.title}</p>
-                                                        <p className="text-sm text-gray-500">
+                                                    <li key={deal.id} className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer">
+                                                        <p className="text-sm font-medium text-gray-900 dark:text-neutral-200">{deal.title}</p>
+                                                        <p className="text-sm text-gray-500 dark:text-neutral-400">
                                                             {contact?.name ? `${contact.name} · ` : ''} 
                                                             {formatCurrency(deal.amount)} - {deal.stage}
                                                         </p>
@@ -163,6 +185,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
                     )}
                 </div>
                 <AppSwitcher />
+                <ThemeToggle />
                 <img
                     className="w-10 h-10 rounded-full"
                     src="https://picsum.photos/seed/user/100/100"

@@ -79,39 +79,39 @@ const DealModal: React.FC<DealModalProps> = ({ isOpen, onClose, dealToEdit }) =>
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center">
-            <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-lg relative">
-                <div className="flex justify-between items-center pb-4 border-b">
-                    <h2 className="text-xl font-semibold text-neutral-800">{isEditing ? 'Edit Deal' : 'Add New Deal'}</h2>
-                    <button onClick={onClose} className="p-1 rounded-full hover:bg-neutral-200">
-                        <XIcon className="w-6 h-6 text-neutral-600" />
+            <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-lg relative dark:bg-neutral-800">
+                <div className="flex justify-between items-center pb-4 border-b dark:border-neutral-700">
+                    <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">{isEditing ? 'Edit Deal' : 'Add New Deal'}</h2>
+                    <button onClick={onClose} className="p-1 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700">
+                        <XIcon className="w-6 h-6 text-neutral-600 dark:text-neutral-300" />
                     </button>
                 </div>
                 <form onSubmit={handleSubmit} className="mt-6 space-y-4 max-h-[70vh] overflow-y-auto pr-2">
                     {/* Form fields */}
-                    <input name="title" value={title} onChange={e => setTitle(e.target.value)} placeholder="Deal Title" className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md" required />
+                    <input name="title" value={title} onChange={e => setTitle(e.target.value)} placeholder="Deal Title" className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md dark:bg-neutral-700 dark:border-neutral-600 dark:text-white" required />
                     <div className="grid grid-cols-2 gap-4">
-                        <input name="amount" type="number" value={amount} onChange={e => setAmount(e.target.value)} placeholder="Amount" className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md" required />
-                        <input name="closeDate" type="date" value={closeDate} onChange={e => setCloseDate(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md" required />
+                        <input name="amount" type="number" value={amount} onChange={e => setAmount(e.target.value)} placeholder="Amount" className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md dark:bg-neutral-700 dark:border-neutral-600 dark:text-white" required />
+                        <input name="closeDate" type="date" value={closeDate} onChange={e => setCloseDate(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md dark:bg-neutral-700 dark:border-neutral-600 dark:text-white" required />
                     </div>
-                    <select name="stage" value={stage} onChange={e => setStage(e.target.value as DealStage)} className="mt-1 block w-full px-3 py-2 border border-neutral-300 bg-white rounded-md">
+                    <select name="stage" value={stage} onChange={e => setStage(e.target.value as DealStage)} className="mt-1 block w-full px-3 py-2 border border-neutral-300 bg-white rounded-md dark:bg-neutral-700 dark:border-neutral-600 dark:text-white">
                         {Object.values(DealStage).map(s => <option key={s} value={s}>{s}</option>)}
                     </select>
-                    <select name="contactId" value={contactId} onChange={e => setContactId(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-neutral-300 bg-white rounded-md" required>
+                    <select name="contactId" value={contactId} onChange={e => setContactId(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-neutral-300 bg-white rounded-md dark:bg-neutral-700 dark:border-neutral-600 dark:text-white" required>
                         <option value="">Select a contact</option>
                         {contacts.map((c: Contact) => <option key={c.id} value={c.id}>{c.name}</option>)}
                     </select>
-                    <select name="appId" value={appId} onChange={e => setAppId(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-neutral-300 bg-white rounded-md" required>
+                    <select name="appId" value={appId} onChange={e => setAppId(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-neutral-300 bg-white rounded-md dark:bg-neutral-700 dark:border-neutral-600 dark:text-white" required>
                         <option value="">Select an app</option>
                         {apps.map((a: App) => <option key={a.id} value={a.id}>{a.name}</option>)}
                     </select>
                     <div>
-                        <label className="block text-sm font-medium text-neutral-700">Probability: {probability}%</label>
-                        <input type="range" min="0" max="100" value={probability} onChange={e => setProbability(Number(e.target.value))} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
+                        <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Probability: {probability}%</label>
+                        <input type="range" min="0" max="100" value={probability} onChange={e => setProbability(Number(e.target.value))} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-neutral-700" />
                     </div>
-                    <textarea name="nextStep" value={nextStep} onChange={e => setNextStep(e.target.value)} placeholder="Next Step" rows={2} className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md" />
-                    <div className="flex justify-end pt-6 border-t mt-6 space-x-3">
-                        <button type="button" onClick={onClose} className="px-4 py-2 bg-neutral-100 text-neutral-700 rounded-md hover:bg-neutral-200">Cancel</button>
-                        <button type="submit" disabled={!isFormValid || isSubmitting} className="px-4 py-2 bg-brand-primary text-white rounded-md hover:bg-blue-800 disabled:bg-blue-300">{isSubmitting ? 'Saving...' : 'Save Deal'}</button>
+                    <textarea name="nextStep" value={nextStep} onChange={e => setNextStep(e.target.value)} placeholder="Next Step" rows={2} className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md dark:bg-neutral-700 dark:border-neutral-600 dark:text-white" />
+                    <div className="flex justify-end pt-6 border-t mt-6 space-x-3 dark:border-neutral-700">
+                        <button type="button" onClick={onClose} className="px-4 py-2 bg-neutral-100 text-neutral-700 rounded-md hover:bg-neutral-200 dark:bg-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-600">Cancel</button>
+                        <button type="submit" disabled={!isFormValid || isSubmitting} className="px-4 py-2 bg-brand-primary text-white rounded-md hover:bg-blue-800 disabled:bg-blue-300 dark:disabled:bg-blue-800/50">{isSubmitting ? 'Saving...' : 'Save Deal'}</button>
                     </div>
                 </form>
             </div>
@@ -127,29 +127,29 @@ const DealCard: React.FC<{ deal: Deal; onEdit: (deal: Deal) => void; onDelete: (
     const formatCurrency = (value: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(value);
 
     return (
-        <div draggable onDragStart={(e) => onDragStart(e, deal.id)} className="bg-white p-4 rounded-lg shadow mb-4 border-l-4 border-blue-500 cursor-grab active:cursor-grabbing relative group">
+        <div draggable onDragStart={(e) => onDragStart(e, deal.id)} className="bg-white p-4 rounded-lg shadow mb-4 border-l-4 border-blue-500 cursor-grab active:cursor-grabbing relative group dark:bg-neutral-800 dark:border-blue-700">
             <div className="absolute top-2 right-2 flex space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                <button onClick={() => onEdit(deal)} className="p-1 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-600"><EditIcon className="w-4 h-4" /></button>
-                <button onClick={() => onDelete(deal.id)} className="p-1 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-600"><TrashIcon className="w-4 h-4" /></button>
+                <button onClick={() => onEdit(deal)} className="p-1 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-600 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-300"><EditIcon className="w-4 h-4" /></button>
+                <button onClick={() => onDelete(deal.id)} className="p-1 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-600 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-300"><TrashIcon className="w-4 h-4" /></button>
             </div>
-            <p className="font-semibold text-gray-800 pr-12">{deal.title}</p>
-            <p className="text-sm text-gray-600">{formatCurrency(deal.amount)}</p>
+            <p className="font-semibold text-gray-800 pr-12 dark:text-neutral-200">{deal.title}</p>
+            <p className="text-sm text-gray-600 dark:text-neutral-400">{formatCurrency(deal.amount)}</p>
             
             <div className="mt-2">
-                <div className="flex justify-between items-center text-xs text-gray-500">
+                <div className="flex justify-between items-center text-xs text-gray-500 dark:text-neutral-400">
                     <span>Probability</span>
                     <span>{deal.probability}%</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-1.5 mt-1">
+                <div className="w-full bg-gray-200 rounded-full h-1.5 mt-1 dark:bg-neutral-700">
                     <div className="bg-blue-500 h-1.5 rounded-full" style={{ width: `${deal.probability}%` }}></div>
                 </div>
             </div>
-            {deal.nextStep && <p className="text-xs text-gray-600 mt-2 truncate" title={deal.nextStep}><strong>Next:</strong> {deal.nextStep}</p>}
+            {deal.nextStep && <p className="text-xs text-gray-600 mt-2 truncate dark:text-neutral-300" title={deal.nextStep}><strong>Next:</strong> {deal.nextStep}</p>}
 
             {contact && (
-                <div className="flex items-center mt-2 pt-2 border-t">
+                <div className="flex items-center mt-2 pt-2 border-t dark:border-neutral-700">
                     <img src={contact.avatarUrl} alt={contact.name} className="w-6 h-6 rounded-full mr-2" />
-                    <span className="text-xs text-gray-500">{contact.name}</span>
+                    <span className="text-xs text-gray-500 dark:text-neutral-400">{contact.name}</span>
                 </div>
             )}
         </div>
@@ -161,10 +161,10 @@ const PipelineColumn: React.FC<{ title: DealStage; deals: Deal[]; onEdit: (deal:
     const formatCurrency = (value: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact' }).format(value);
 
     return (
-        <div onDragOver={(e) => e.preventDefault()} onDrop={(e) => onDrop(e, title)} className="flex-shrink-0 w-80 bg-gray-100 rounded-lg p-3">
+        <div onDragOver={(e) => e.preventDefault()} onDrop={(e) => onDrop(e, title)} className="flex-shrink-0 w-80 bg-gray-100 rounded-lg p-3 dark:bg-neutral-900">
             <div className="flex justify-between items-center mb-4 px-1">
-                <h3 className="font-semibold text-gray-700">{title} <span className="text-sm font-normal text-gray-500">({deals.length})</span></h3>
-                <span className="text-sm text-gray-500 font-medium">{formatCurrency(totalValue)}</span>
+                <h3 className="font-semibold text-gray-700 dark:text-neutral-300">{title} <span className="text-sm font-normal text-gray-500 dark:text-neutral-400">({deals.length})</span></h3>
+                <span className="text-sm text-gray-500 font-medium dark:text-neutral-400">{formatCurrency(totalValue)}</span>
             </div>
             <div className="h-full">
                 {deals.map(deal => (

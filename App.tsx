@@ -27,7 +27,7 @@ const App: React.FC = () => {
 
   return (
     <AppProvider>
-      <div className="flex h-screen bg-neutral-100">
+      <div className="flex h-screen bg-neutral-100 dark:bg-neutral-900">
         <Sidebar />
         <main className="flex-1 flex flex-col overflow-hidden">
           <Header title={getTitle()} />
