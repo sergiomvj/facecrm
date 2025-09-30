@@ -16,6 +16,8 @@ interface AppContextType {
   addApp: (app: Omit<App, 'id' | 'createdAt'>) => Promise<void>;
   addContact: (contact: Omit<Contact, 'id' | 'createdAt' | 'avatarUrl'>) => Promise<void>;
   addDeal: (deal: Omit<Deal, 'id'>) => Promise<void>;
+  editDeal: (deal: Deal) => Promise<void>;
+  deleteDeal: (dealId: string) => Promise<void>;
   addTask: (task: Omit<Task, 'id'>) => Promise<void>;
   editTask: (task: Task) => Promise<void>;
   deleteTask: (taskId: string) => Promise<void>;
@@ -117,6 +119,26 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       }
   };
 
+  const editDeal = async (updatedDeal: Deal) => {
+    if (dataSource === 'live' && supabase) {
+        const { data, error } = await supabase.from('deals').update(updatedDeal).eq('id', updatedDeal.id).select();
+        if (error) console.error("Error editing deal:", error);
+        else if (data) setDeals(prevDeals => prevDeals.map(deal => deal.id === updatedDeal.id ? data[0] : deal));
+    } else {
+        setDeals(prevDeals => prevDeals.map(deal => deal.id === updatedDeal.id ? updatedDeal : deal));
+    }
+  };
+
+  const deleteDeal = async (dealId: string) => {
+      if (dataSource === 'live' && supabase) {
+        const { error } = await supabase.from('deals').delete().eq('id', dealId);
+        if (error) console.error("Error deleting deal:", error);
+        else setDeals(prevDeals => prevDeals.filter(deal => deal.id !== dealId));
+      } else {
+        setDeals(prevDeals => prevDeals.filter(deal => deal.id !== dealId));
+      }
+  };
+
   const addTask = async (taskData: Omit<Task, 'id'>) => {
     if (dataSource === 'live' && supabase) {
         const { data, error } = await supabase.from('tasks').insert([taskData]).select();
@@ -150,7 +172,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   const value = {
     apps, contacts, deals, tasks, selectedAppId, setSelectedAppId, selectedAppName, 
-    addApp, addContact, addDeal, addTask, editTask, deleteTask,
+    addApp, addContact, addDeal, editDeal, deleteDeal, addTask, editTask, deleteTask,
     dataSource, setDataSource, loading
   };
 

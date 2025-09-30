@@ -16,14 +16,14 @@ export const mockContacts: Contact[] = [
 ];
 
 export const mockDeals: Deal[] = [
-  { id: 'deal_1', title: 'IGOTIT Enterprise License', amount: 25000, stage: DealStage.Won, contactId: 'contact_1', appId: 'app_1', closeDate: '2023-06-15T00:00:00Z' },
-  { id: 'deal_2', title: 'LifeWayUSA Pro Plan', amount: 5000, stage: DealStage.Won, contactId: 'contact_2', appId: 'app_2', closeDate: '2023-06-20T00:00:00Z' },
-  { id: 'deal_3', title: 'QuantumLeap Pro Upgrade', amount: 8000, stage: DealStage.ProposalSent, contactId: 'contact_3', appId: 'app_3', closeDate: '2023-07-10T00:00:00Z' },
-  { id: 'deal_4', title: 'IGOTIT Support Package', amount: 7500, stage: DealStage.DemoScheduled, contactId: 'contact_5', appId: 'app_1', closeDate: '2023-07-25T00:00:00Z' },
-  { id: 'deal_5', title: 'LifeWayUSA Annual Renewal', amount: 4500, stage: DealStage.ContactMade, contactId: 'contact_6', appId: 'app_2', closeDate: '2023-08-01T00:00:00Z' },
-  { id: 'deal_6', title: 'New Lead from Website', amount: 12000, stage: DealStage.LeadIn, contactId: 'contact_4', appId: 'app_3', closeDate: '2023-08-15T00:00:00Z' },
-  { id: 'deal_7', title: 'Past Customer Reactivation', amount: 18000, stage: DealStage.Lost, contactId: 'contact_1', appId: 'app_2', closeDate: '2023-06-30T00:00:00Z' },
-  { id: 'deal_8', title: 'QuantumLeap Initial Deal', amount: 10000, stage: DealStage.Won, contactId: 'contact_4', appId: 'app_3', closeDate: '2023-06-05T00:00:00Z' },
+  { id: 'deal_1', title: 'IGOTIT Enterprise License', amount: 25000, stage: DealStage.Won, contactId: 'contact_1', appId: 'app_1', closeDate: '2023-06-15T00:00:00Z', probability: 100, nextStep: 'Finalize contract.' },
+  { id: 'deal_2', title: 'LifeWayUSA Pro Plan', amount: 5000, stage: DealStage.Won, contactId: 'contact_2', appId: 'app_2', closeDate: '2023-06-20T00:00:00Z', probability: 100, nextStep: 'Onboarding complete.' },
+  { id: 'deal_3', title: 'QuantumLeap Pro Upgrade', amount: 8000, stage: DealStage.ProposalSent, contactId: 'contact_3', appId: 'app_3', closeDate: '2023-07-10T00:00:00Z', probability: 75, nextStep: 'Follow up on proposal feedback.' },
+  { id: 'deal_4', title: 'IGOTIT Support Package', amount: 7500, stage: DealStage.DemoScheduled, contactId: 'contact_5', appId: 'app_1', closeDate: '2023-07-25T00:00:00Z', probability: 50, nextStep: 'Prepare for product demo.' },
+  { id: 'deal_5', title: 'LifeWayUSA Annual Renewal', amount: 4500, stage: DealStage.ContactMade, contactId: 'contact_6', appId: 'app_2', closeDate: '2023-08-01T00:00:00Z', probability: 25, nextStep: 'Schedule renewal call.' },
+  { id: 'deal_6', title: 'New Lead from Website', amount: 12000, stage: DealStage.LeadIn, contactId: 'contact_4', appId: 'app_3', closeDate: '2023-08-15T00:00:00Z', probability: 10, nextStep: 'Initial qualification call.' },
+  { id: 'deal_7', title: 'Past Customer Reactivation', amount: 18000, stage: DealStage.Lost, contactId: 'contact_1', appId: 'app_2', closeDate: '2023-06-30T00:00:00Z', probability: 0, nextStep: 'Went with competitor.' },
+  { id: 'deal_8', title: 'QuantumLeap Initial Deal', amount: 10000, stage: DealStage.Won, contactId: 'contact_4', appId: 'app_3', closeDate: '2023-06-05T00:00:00Z', probability: 100, nextStep: 'Project kickoff meeting scheduled.' },
 ];
 
 export const mockTasks: Task[] = [

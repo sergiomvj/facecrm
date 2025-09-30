@@ -32,6 +32,8 @@ export interface Deal {
   contactId: string;
   appId: string;
   closeDate: string;
+  probability: number; // 0-100
+  nextStep: string;
 }
 
 export enum TaskStatus {
